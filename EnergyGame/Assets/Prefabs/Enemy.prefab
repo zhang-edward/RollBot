@@ -149,8 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 50003689408861580}
-  playerTransform: {fileID: 0}
-  zombieMoveSpeed: 0
+  playerTransform: {fileID: 4593089852654752, guid: 4d9169bdd710042a68fd2af16940f876,
+    type: 2}
+  zombieMoveSpeed: 4
+  lootDrop: {fileID: 0}
+  lootPool: {fileID: 0}
 --- !u!212 &212402250121750726
 SpriteRenderer:
   m_ObjectHideFlags: 1
