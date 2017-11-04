@@ -7,6 +7,10 @@ public class Enemy : MonoBehaviour {
 	public Rigidbody2D rb2d;
 	public Transform playerTransform;
 	public float zombieMoveSpeed;
+	public Loot lootDrop;
+	public ObjectPooler lootPool;
+
+
 
 	void Update(){
 		float vx = 0;
@@ -20,5 +24,9 @@ public class Enemy : MonoBehaviour {
 
 	public void Die() {
 		gameObject.SetActive(false);
+		GameObject l = lootPool.GetPooledObject();
+		l.transform.position = transform.position;
+		l.SetActive(true);
 	}
+
 }
