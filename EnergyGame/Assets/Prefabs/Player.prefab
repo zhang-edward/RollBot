@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab8de93d550b4cf2a32bbea23c7c525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1777035302906706, guid: 9460c4143061445f6840c850f1d1f212, type: 2}
+  bulletPool: {fileID: 114613928842443310, guid: 792b9b891a1684574a060a4699b87ace,
+    type: 2}
   rb2d: {fileID: 50673459457171534}
   moveSpeed: 5
   energy: 100

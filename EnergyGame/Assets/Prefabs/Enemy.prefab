@@ -145,12 +145,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1581992079448244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ec1d2d8545a04ada91e69ce826798c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 16ac1d8cbe95144dfbbde476f0e78a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 50003689408861580}
   playerTransform: {fileID: 0}
-  zombieMoveSpeed: 1
+  zombieMoveSpeed: 0
 --- !u!212 &212402250121750726
 SpriteRenderer:
   m_ObjectHideFlags: 1
