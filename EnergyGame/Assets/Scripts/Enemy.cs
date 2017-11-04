@@ -7,8 +7,11 @@ public class Enemy : MonoBehaviour {
 	public Rigidbody2D rb2d;
 	public Transform playerTransform;
 	public float moveSpeed;
-	public Loot lootDrop;
-	public ObjectPooler lootPool;
+	private ObjectPooler lootPool;
+
+	void Start() {
+		lootPool = ObjectPooler.GetObjectPooler("Loot");
+	}
 
 	void Update(){
 		float vx = 0;

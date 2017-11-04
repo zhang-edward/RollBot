@@ -12,10 +12,6 @@ public class Bullet : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D>();
 	}
 
-	void OnDisable() {
-		EffectPooler.PlayEffect(anim, transform.position);
-	}
-
 	public void Init(Vector2 dir) {
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -28,11 +24,17 @@ public class Bullet : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 
+	private void DestroySelf()
+	{
+		gameObject.SetActive(false);
+		EffectPooler.PlayEffect(anim, transform.position);
+	}
+
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Enemy")) {
 			Enemy e = collision.gameObject.GetComponent<Enemy>();
-			gameObject.SetActive(false);
 			e.Die();
+			DestroySelf();
 		}
 	}
 }
