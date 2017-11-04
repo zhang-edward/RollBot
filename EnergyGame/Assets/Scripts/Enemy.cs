@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour {
 
 	public Rigidbody2D rb2d;
 	public Transform playerTransform;
-	public float zombieMoveSpeed;
+	public float moveSpeed;
 
 	void Update(){
 		float vx = 0;
@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour {
 		Vector3 playerPosUnit = (playerPos - transform.position).normalized;
 		vx = playerPosUnit.x;
 		vy = playerPosUnit.y;
-		rb2d.velocity = new Vector2(vx, vy) * zombieMoveSpeed;
+		rb2d.velocity = new Vector2(vx, vy) * moveSpeed;
 	}
 
 	public void Die() {

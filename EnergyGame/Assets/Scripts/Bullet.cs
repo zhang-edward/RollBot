@@ -5,14 +5,20 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
-
+	public SimpleAnimation anim;
 
 	void Awake() {
 		rb2d = GetComponent<Rigidbody2D>();
 	}
 
+	void OnDisable() {
+		EffectPooler.PlayEffect(anim, transform.position);
+	}
+
 	public void Init(Vector2 dir) {
-		rb2d.velocity = dir.normalized;
+		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler(0, 0, angle);
+		rb2d.velocity = dir.normalized * 20f;
 		StartCoroutine(DestroySelfRoutine());
 	}
 
