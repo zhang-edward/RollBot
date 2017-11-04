@@ -175,13 +175,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eab8de93d550b4cf2a32bbea23c7c525, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   bulletPool: {fileID: 114613928842443310, guid: 792b9b891a1684574a060a4699b87ace,
     type: 2}
   rb2d: {fileID: 50673459457171534}
   firePoint: {fileID: 4891344142793076}
-  defaultMoveSpeed: 2
+  defaultMoveSpeed: 5
   moveSpeedMultiplier: 1
   energy: 100
   maxEnergy: 100

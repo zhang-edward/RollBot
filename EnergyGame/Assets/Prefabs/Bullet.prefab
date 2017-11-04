@@ -87,8 +87,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d3338460bba343f5add78c8b7e6decb, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   anim:
     frames:
     - {fileID: 21300000, guid: 19aec175ca5b24d34ba6c6e6afdd2a57, type: 3}
@@ -97,6 +97,7 @@ MonoBehaviour:
     - {fileID: 21300006, guid: 19aec175ca5b24d34ba6c6e6afdd2a57, type: 3}
     - {fileID: 21300008, guid: 19aec175ca5b24d34ba6c6e6afdd2a57, type: 3}
     fps: 20
+  bulletSpeed: 20
 --- !u!212 &212492145088268746
 SpriteRenderer:
   m_ObjectHideFlags: 1
