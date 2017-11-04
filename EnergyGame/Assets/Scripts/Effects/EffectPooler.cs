@@ -11,7 +11,6 @@ public class EffectPooler : ObjectPooler
 		poolType = EFFECT_POOL_NAME;
 		base.Init();
 		instance = this;
-		print(instance);
 	}
 
 	public static void PlayEffect(SimpleAnimation toPlay, Vector3 position, bool randRotation = false, float fadeOutTime = 0f)
