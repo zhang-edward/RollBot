@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+	public ObjectPooler bulletPool;
 	public Rigidbody2D rb2d;
 	public float moveSpeed;
 	public float energy = 100f;
@@ -24,7 +25,11 @@ public class Player : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0))
 		{
 			Physics2D.RaycastAll(transform.position, dir, 5);
-			Debug.DrawRay(transform.position, transform.position + dir, Color.red, 1);
+			Debug.DrawLine(transform.position, transform.position + dir, Color.red, 1);
+			GameObject o = bulletPool.GetPooledObject();
+			o.transform.position = transform.position;
+			o.SetActive(true);
+			o.GetComponent<Bullet>().Init(dir);
 		}
 	}
 
