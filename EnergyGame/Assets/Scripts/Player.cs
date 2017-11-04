@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
 	void Update()
 	{
 		energy -= Time.deltaTime * energyDecreaseSpeed;
+
 		Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 		LookAtDir(dir);
 		GetAxisInput();
