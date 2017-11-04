@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
 
+
 	void Awake() {
 		rb2d = GetComponent<Rigidbody2D>();
 	}
@@ -18,5 +19,13 @@ public class Bullet : MonoBehaviour {
 	private IEnumerator DestroySelfRoutine() {
 		yield return new WaitForSeconds(2.0f);
 		gameObject.SetActive(false);
+	}
+
+	void OnTriggerEnter2D(Collider2D collision) {
+		if (collision.CompareTag("Enemy")) {
+			Enemy e = collision.gameObject.GetComponent<Enemy>();
+			gameObject.SetActive(false);
+			e.Die();
+		}
 	}
 }

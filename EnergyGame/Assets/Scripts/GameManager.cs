@@ -3,5 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-	
+
+	public GameObject enemyPrefab;
+
+	void Awake() {
+		
+	}
 }
