@@ -41,7 +41,8 @@ public class CameraControl : MonoBehaviour
 		}
 		else
 		{
-			transform.position = Vector3.Lerp(transform.position, focus.position, Time.deltaTime * 10f);
+			transform.position = focus.position;
+			//transform.position = Vector3.Lerp(transform.position, focus.position, Time.deltaTime * f);
 		}
 	}
 
