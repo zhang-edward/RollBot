@@ -32,7 +32,7 @@ public class CameraControl : MonoBehaviour
 		screenOverlay.color = new Color(1, 1, 1, 0);
 	}
 
-	void Update()
+	void LateUpdate()
 	{
 		if (secondaryFocus != null)
 		{

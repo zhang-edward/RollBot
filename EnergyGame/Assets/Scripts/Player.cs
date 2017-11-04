@@ -10,15 +10,23 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float vx = 0;
-		float vy = 0;
-		vx = Input.GetAxisRaw("Horizontal");
-		vy = Input.GetAxisRaw("Vertical");
+		AimAtMouse();
+		GetAxisInput();
+	}
+
+	private void GetAxisInput() {
+		float vx = Input.GetAxisRaw("Horizontal");
+		float vy = Input.GetAxisRaw("Vertical");
 		rb2d.velocity = new Vector2(vx, vy) * moveSpeed;
+	}
+
+	private void AimAtMouse(){
+		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+		float angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler(0, 0, angle);
 	}
 }
