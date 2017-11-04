@@ -5,13 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
+	public float bulletSpeed;
 
 	void Awake() {
 		rb2d = GetComponent<Rigidbody2D>();
 	}
 
 	public void Init(Vector2 dir) {
-		rb2d.velocity = dir.normalized;
+		rb2d.velocity = dir.normalized * bulletSpeed;
 		StartCoroutine(DestroySelfRoutine());
 	}
 
