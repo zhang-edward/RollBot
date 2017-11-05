@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
-	public SimpleAnimation anim;
+	public SimpleAnimation hitAnimation;
 	public float bulletSpeed;
 	public float bulletDamage;
 
@@ -20,6 +20,11 @@ public class Bullet : MonoBehaviour {
 		StartCoroutine(DestroySelfRoutine());
 	}
 
+	private void OnEnable()
+	{
+		GetComponent<SimpleAnimationPlayer>().Play();
+	}
+
 	private IEnumerator DestroySelfRoutine() {
 		yield return new WaitForSeconds(2.0f);
 		gameObject.SetActive(false);
@@ -28,7 +33,7 @@ public class Bullet : MonoBehaviour {
 	private void DestroySelf()
 	{
 		gameObject.SetActive(false);
-		EffectPooler.PlayEffect(anim, transform.position);
+		EffectPooler.PlayEffect(hitAnimation, transform.position);
 	}
 
 	void OnTriggerEnter2D(Collider2D collision) {

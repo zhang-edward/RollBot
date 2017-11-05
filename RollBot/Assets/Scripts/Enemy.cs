@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour {
 
 	public void Hit(float damage){
 		health -= damage;
+		StartCoroutine(FlashRed());
 		if(health <= 0){
 			this.Die();
 		}
@@ -66,6 +67,7 @@ public class Enemy : MonoBehaviour {
 		l.transform.position = transform.position;
 		l.SetActive(true);
 		gameObject.SetActive(false);
+		GameManager.instance.RemoveEnemy(this);
 
 	}
 
@@ -80,5 +82,12 @@ public class Enemy : MonoBehaviour {
 				StopCoroutine(bumpRoutine);
 			bumpRoutine = StartCoroutine(Bumping(transform.position, (backwardPlayerPosUnit + transform.position)));
 		}
+	}
+
+	private IEnumerator FlashRed()
+	{
+		sr.color = Color.red;
+		yield return new WaitForSeconds(0.2f);
+		sr.color = Color.white;
 	}
 }

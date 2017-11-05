@@ -16,6 +16,11 @@ public class Player : MonoBehaviour {
 	public SimpleAnimationPlayer anim;
 	public SimpleAnimation walkU, walkSide, walkD;
 	public SimpleAnimation deathAnim;
+	[Header("Audio")]
+	public AudioClip shootSound;
+	public AudioClip dieSound;
+	public AudioClip hurtSound;
+	public AudioClip energyPickupSound;
 	[Header("Properties")]
 	public float defaultMoveSpeed;
 	public float moveSpeedMultiplier = 1f;
@@ -76,16 +81,9 @@ public class Player : MonoBehaviour {
 			energy -= Time.deltaTime * COST_SPRINT;
 		}
 		dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-		if (dir.y > 0 && dir.y > dir.x) {
-			
-		}
-
 		if(combo > 0){
 			combo -= 1;
 		}
-
-
-
 		LookAtDir();
 		GetAxisInput();
 	}
@@ -134,6 +132,7 @@ public class Player : MonoBehaviour {
 		o.SetActive(true);
 		o.GetComponent<Bullet>().Init(dir);
 		energy -= COST_SHOOT;
+		SoundManager.RandomizeSFX(shootSound);
 		if(energy <= 0f){
 			Die();
 		}
@@ -141,6 +140,7 @@ public class Player : MonoBehaviour {
 
 	public void AddEnergy(float amt){
 		energy += amt;
+		SoundManager.RandomizeSFX(energyPickupSound);
 		//make sure player isn't going over max energy
 		if(energy > maxEnergy){
 			energy = maxEnergy;
@@ -150,8 +150,9 @@ public class Player : MonoBehaviour {
 	public void TakeEnergy(float amt){
 		if (invincible)
 			return;
+		SoundManager.RandomizeSFX(hurtSound);
 		energy -= amt;
-		CameraControl.instance.StartShake(0.05f, 0.05f, true, true);
+		CameraControl.instance.StartShake(0.1f, 0.05f, true, true);
 		StartCoroutine(FlashRed());
 		energy -= amt;
 		if(energy <= 0f){
@@ -169,6 +170,7 @@ public class Player : MonoBehaviour {
 
 	private void Die(){
 		gameObject.SetActive(false);
+		SoundManager.RandomizeSFX(dieSound);
 		//EffectPooler.PlayEffect(deathAnim, transform.position);
 	}
 
