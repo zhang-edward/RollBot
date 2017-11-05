@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class Loot : MonoBehaviour {
 	public Rigidbody2D rb2d;
+	public Player player;
+
 
 	void Awake() {
 		rb2d = GetComponent<Rigidbody2D>();
 	}
 
-	/*
+
 	public void Init(Vector3 dropLocation){
-		
+
 	}
-	*/
 
 	void OnTriggerEnter2D(Collider2D collision) {
+		Player playerCollision = collision.gameObject.GetComponent<Player>();
 		if (collision.CompareTag("Player")) {
-			Player p = collision.gameObject.GetComponent<Player>();
 			gameObject.SetActive(false);
 		}
 	}
+
+
 
 }

@@ -37,6 +37,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+
 		//energy -= Time.deltaTime * ENERGY_DECREASE_SPEED;
 		if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
@@ -90,4 +91,15 @@ public class Player : MonoBehaviour {
 		o.GetComponent<Bullet>().Init(dir);
 		energy -= COST_SHOOT;
 	}
+
+	public void addEnergy(float amt){
+		print("energy is: " + energy);
+		print("energy to add is: " + amt);
+		energy += amt;
+		//make sure player isn't going over max energy
+		if(energy > maxEnergy){
+			energy = maxEnergy;
+		}
+	}
+
 }

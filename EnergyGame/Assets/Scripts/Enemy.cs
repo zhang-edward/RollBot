@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour {
 	private ObjectPooler lootPool;
 
 	void Start() {
-		lootPool = ObjectPooler.GetObjectPooler("Loot");
+		lootPool = ObjectPooler.GetObjectPooler("EnergyLoot");
 	}
 
 	void Update(){
@@ -24,10 +24,10 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void Die() {
-		gameObject.SetActive(false);
 		GameObject l = lootPool.GetPooledObject();
 		l.transform.position = transform.position;
 		l.SetActive(true);
+		gameObject.SetActive(false);
 	}
 
 }
