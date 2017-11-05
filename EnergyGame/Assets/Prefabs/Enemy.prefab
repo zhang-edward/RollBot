@@ -122,6 +122,7 @@ MonoBehaviour:
   playerTransform: {fileID: 4593089852654752, guid: 4d9169bdd710042a68fd2af16940f876,
     type: 2}
   moveSpeed: 4
+  maxHealth: 100
 --- !u!212 &212636000232279474
 SpriteRenderer:
   m_ObjectHideFlags: 1

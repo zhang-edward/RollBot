@@ -7,10 +7,16 @@ public class Enemy : MonoBehaviour {
 	public Rigidbody2D rb2d;
 	public Transform playerTransform;
 	public float moveSpeed;
+	public float maxHealth;
+	private float health;
 	private ObjectPooler lootPool;
 
 	void Start() {
 		lootPool = ObjectPooler.GetObjectPooler("EnergyLoot");
+	}
+
+	void Awake(){
+		health = maxHealth;
 	}
 
 	void Update(){
@@ -21,6 +27,13 @@ public class Enemy : MonoBehaviour {
 		vx = playerPosUnit.x;
 		vy = playerPosUnit.y;
 		rb2d.velocity = new Vector2(vx, vy) * moveSpeed;
+	}
+
+	public void Hit(float damage){
+		health -= damage;
+		if(health <= 0){
+			this.Die();
+		}
 	}
 
 	public void Die() {

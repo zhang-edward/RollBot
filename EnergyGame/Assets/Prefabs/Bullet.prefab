@@ -98,6 +98,7 @@ MonoBehaviour:
     - {fileID: 21300008, guid: 19aec175ca5b24d34ba6c6e6afdd2a57, type: 3}
     fps: 20
   bulletSpeed: 20
+  bulletDamage: 50
 --- !u!212 &212492145088268746
 SpriteRenderer:
   m_ObjectHideFlags: 1
