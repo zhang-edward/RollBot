@@ -172,6 +172,7 @@ MonoBehaviour:
   anim: {fileID: 114999653088860688}
   moveSpeed: 3
   maxHealth: 100
+  energyDropAmount: 4
   collisionDamage: 10
   knockbackRadius: 0
 --- !u!114 &114999653088860688

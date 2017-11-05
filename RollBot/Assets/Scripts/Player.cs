@@ -33,7 +33,6 @@ public class Player : MonoBehaviour {
 	public float maxCombo = 100f;
 	public float combo;
 	private float comboStatus;
-	private float fireRateMultiplier = 1;
 
 	private Vector2 dir;
 	private bool sprinting = false;
@@ -42,6 +41,9 @@ public class Player : MonoBehaviour {
 			return defaultMoveSpeed * moveSpeedMultiplier;
 		}
 	}
+
+	public delegate void OnPlayerStateChanged();
+	public event OnPlayerStateChanged OnPlayerDied;
 
 	void Awake() {
 		energy = maxEnergy;
@@ -172,6 +174,8 @@ public class Player : MonoBehaviour {
 	private void Die(){
 		gameObject.SetActive(false);
 		SoundManager.RandomizeSFX(dieSound);
+		if (OnPlayerDied != null)
+			OnPlayerDied();
 		//EffectPooler.PlayEffect(deathAnim, transform.position);
 	}
 

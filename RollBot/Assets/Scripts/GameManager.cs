@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -18,6 +19,10 @@ public class GameManager : MonoBehaviour {
 	public Transform enemiesFolder;
 	public SimpleAnimation spawnAnim;
 	public float spawnTimer = 2;
+	[Header("UI")]
+	public GameOverView gameOverView;
+	public GameObject startPanel;
+
 
 	private List<Enemy> enemies = new List<Enemy>();
 
@@ -30,8 +35,27 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void Start() {
+	private void OnEnable()
+	{
+		player.GetComponent<Player>().OnPlayerDied += ShowGameOverView;
+	}
+
+	private void OnDisable()
+	{
+		player.GetComponent<Player>().OnPlayerDied -= ShowGameOverView;
+	}
+
+	public void ShowGameOverView() {
+		gameOverView.ShowScore(0, 0, 0);
+	}
+
+	public void StartGame() {
 		StartCoroutine(SpawnEnemyRoutine());
+	}
+
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.R))
+			SceneManager.LoadScene("EdwardTest");
 	}
 
 	private IEnumerator SpawnEnemyRoutine() {
@@ -41,18 +65,18 @@ public class GameManager : MonoBehaviour {
 			//float randXOffset = Random.Range(-5, 5);
 			//float randYOffset = Random.Range(-5, 5);
 			//Vector3 spawnPosition = player.position + new Vector3(randXOffset, randYOffset, 0);
-			StartCoroutine(SpawnEnemyRoutine(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]));
+			StartCoroutine(SpawnEnemyDelayed(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]));
 			enemyCount++;
 
 			//every 5 seconds, increase the rate at which monsters spawn, which is 1/spawnTimer, starting at spawnTimer = 2 (2 spawns per second)
 			if(enemyCount % 5 == 0){
 				spawnTimer++;
 			}
-			yield return new WaitForSeconds(1/spawnTimer);
+			yield return new WaitForSeconds(4/spawnTimer);
 		}
 	}
 
-	private IEnumerator SpawnEnemyRoutine(GameObject prefab) {
+	private IEnumerator SpawnEnemyDelayed(GameObject prefab) {
 		float halfMapSize = MapGenerator.MAP_SIZE / 2f;
 		float randX = Random.Range(-halfMapSize + MAP_SPAWN_BUFFER, -halfMapSize + MapGenerator.MAP_SIZE - MAP_SPAWN_BUFFER);
 		float randY = Random.Range(-halfMapSize + MAP_SPAWN_BUFFER, -halfMapSize + MapGenerator.MAP_SIZE - MAP_SPAWN_BUFFER);

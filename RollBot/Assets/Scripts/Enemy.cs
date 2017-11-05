@@ -12,11 +12,11 @@ public class Enemy : MonoBehaviour {
 	public SimpleAnimationPlayer anim;
 	public float moveSpeed;
 	public float maxHealth;
+	public float energyDropAmount;
 	private float health;
 	protected ObjectPooler lootPool;
 	public float collisionDamage;
 	public float knockbackRadius;
-	private bool isBumped;
 
 	private Coroutine movementRoutine;
 	private Coroutine bumpRoutine;
@@ -65,6 +65,7 @@ public class Enemy : MonoBehaviour {
 		player.UpdateCombo();
 		GameObject l = lootPool.GetPooledObject();
 		l.transform.position = transform.position;
+		l.GetComponent<EnergyLoot>().SetEnergy(energyDropAmount);
 		l.SetActive(true);
 		gameObject.SetActive(false);
 		GameManager.instance.RemoveEnemy(this);
