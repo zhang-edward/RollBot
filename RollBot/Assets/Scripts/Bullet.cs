@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour {
 	}
 
 	private IEnumerator DestroySelfRoutine() {
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(0.7f);
 		gameObject.SetActive(false);
 	}
 
@@ -35,6 +35,9 @@ public class Bullet : MonoBehaviour {
 		if (collision.CompareTag("Enemy")) {
 			Enemy e = collision.gameObject.GetComponent<Enemy>();
 			e.Hit(bulletDamage);
+			DestroySelf();
+		}
+		if(collision.CompareTag("Collider")){
 			DestroySelf();
 		}
 	}

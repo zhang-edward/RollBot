@@ -28,6 +28,10 @@ public class BounceEnemy : Enemy {
 		{
 			Bounce();
 		}
+	
+		if(collision.collider.CompareTag("Player")){
+			Bounce();
+		}
 	}
 
 	private void Bounce() {
