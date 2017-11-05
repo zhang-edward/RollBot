@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour {
 	public Transform player;
 
 	void Awake() {
+		//makes a singleton
+		if(instance == null){
+			instance = this;
+		} else if(instance != this){
+			Destroy(this.gameObject);
+		}
 	}
 
 	void Start() {
