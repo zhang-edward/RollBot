@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(SpawnEnemyRoutine());
 	}
 
-
 	private IEnumerator SpawnEnemyRoutine() {
 		for (;;) {
 			float randXOffset = Random.Range(-5, 5);
