@@ -10,12 +10,18 @@ public class Enemy : MonoBehaviour {
 	public SimpleAnimation walk;
 	public SimpleAnimationPlayer anim;
 	public float moveSpeed;
+	public float maxHealth;
+	private float health;
 	private ObjectPooler lootPool;
 
 	void Start() {
-		lootPool = ObjectPooler.GetObjectPooler("Loot");
 		anim.anim = walk;
 		anim.Play();
+		lootPool = ObjectPooler.GetObjectPooler("EnergyLoot");
+	}
+
+	void Awake(){
+		health = maxHealth;
 	}
 
 	void Update(){
@@ -29,11 +35,18 @@ public class Enemy : MonoBehaviour {
 		sr.flipX = vx < 0;
 	}
 
+	public void Hit(float damage){
+		health -= damage;
+		if(health <= 0){
+			this.Die();
+		}
+	}
+
 	public void Die() {
-		gameObject.SetActive(false);
 		GameObject l = lootPool.GetPooledObject();
 		l.transform.position = transform.position;
 		l.SetActive(true);
+		gameObject.SetActive(false);
 	}
 
 }

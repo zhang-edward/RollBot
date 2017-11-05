@@ -270,10 +270,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 16
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 400, y: 300}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -308,7 +308,7 @@ RectTransform:
   m_GameObject: {fileID: 295179100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 80}
-  m_LocalScale: {x: 0.044728436, y: 0.044728436, z: 0.044728436}
+  m_LocalScale: {x: 0.062172525, y: 0.062172525, z: 0.062172525}
   m_Children:
   - {fileID: 1278910077}
   m_Father: {fileID: 0}
@@ -515,7 +515,7 @@ MonoBehaviour:
     - {fileID: 21300004, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
     - {fileID: 21300006, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
     fps: 10
-  defaultMoveSpeed: 5
+  defaultMoveSpeed: 7
   moveSpeedMultiplier: 1
   energy: 100
   maxEnergy: 100
@@ -829,18 +829,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1508458256991490, guid: 792b9b891a1684574a060a4699b87ace, type: 2}
       propertyPath: m_Name
-      value: LootPool
+      value: EnergyLootPool
       objectReference: {fileID: 0}
     - target: {fileID: 114613928842443310, guid: 792b9b891a1684574a060a4699b87ace,
         type: 2}
       propertyPath: poolType
-      value: Loot
+      value: EnergyLoot
       objectReference: {fileID: 0}
     - target: {fileID: 114613928842443310, guid: 792b9b891a1684574a060a4699b87ace,
         type: 2}
       propertyPath: pooledObject
       value: 
-      objectReference: {fileID: 1731314240852612, guid: f4bd0e203aa0941aa8ef0b407a997b87,
+      objectReference: {fileID: 1561324752782820, guid: 3d0de73b3098343bbb28389d1dc8862d,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 792b9b891a1684574a060a4699b87ace, type: 2}
@@ -1202,7 +1202,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 1483525918468876, guid: ae311cf03ee8d4a76a57b1a201cdef33, type: 2}
-  bgPrefab: {fileID: 0}
   mapSize: 40
 --- !u!4 &1998890309
 Transform:

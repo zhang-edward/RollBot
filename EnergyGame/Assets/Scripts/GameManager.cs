@@ -15,13 +15,15 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(SpawnEnemyRoutine());
 	}
 
+
 	private IEnumerator SpawnEnemyRoutine() {
 		for (;;) {
 			float randXOffset = Random.Range(-5, 5);
 			float randYOffset = Random.Range(-5, 5);
 			Vector3 spawnPosition = player.position + new Vector3(randXOffset, randYOffset, 0);
 			GameObject o = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-			o.GetComponent<Enemy>().playerTransform = player;
+			Enemy e = o.GetComponent<Enemy>();
+			e.playerTransform = player;
 			yield return new WaitForSeconds(2.0f);
 		}
 	}

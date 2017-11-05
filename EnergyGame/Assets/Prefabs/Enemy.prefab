@@ -170,6 +170,7 @@ MonoBehaviour:
     fps: 10
   anim: {fileID: 114999653088860688}
   moveSpeed: 4
+  maxHealth: 100
 --- !u!114 &114999653088860688
 MonoBehaviour:
   m_ObjectHideFlags: 1
