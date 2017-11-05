@@ -60,10 +60,13 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public virtual void Die() {
+		Player player = GameManager.instance.player.GetComponent<Player>();
+		player.UpdateCombo();
 		GameObject l = lootPool.GetPooledObject();
 		l.transform.position = transform.position;
 		l.SetActive(true);
 		gameObject.SetActive(false);
+
 	}
 
 	protected virtual void OnCollisionEnter2D(Collision2D collision) {
