@@ -21,7 +21,12 @@ public class Player : MonoBehaviour {
 	public float moveSpeedMultiplier = 1f;
 	public float energy;
 	public float maxEnergy = 100f;
-	public float fireRate = 0.1f;
+	public float fireRate = 3f;
+	private float originalFireRate;
+
+	public float maxCombo = 100f;
+	public float combo;
+	private float comboStatus;
 
 	private Vector2 dir;
 	private bool sprinting = false;
@@ -33,6 +38,8 @@ public class Player : MonoBehaviour {
 
 	void Awake() {
 		energy = maxEnergy;
+		combo = 0;
+		originalFireRate = fireRate;
 	}
 
 	// Use this for initialization
@@ -40,12 +47,16 @@ public class Player : MonoBehaviour {
 		StartCoroutine(ShootRoutine());
 		anim.anim = walkD;
 		anim.Play();
+
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-
+		if(combo <= 0f){
+			fireRate = originalFireRate;
+			comboStatus = 0;
+		}
 		//energy -= Time.deltaTime * ENERGY_DECREASE_SPEED;
 		if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
@@ -67,6 +78,13 @@ public class Player : MonoBehaviour {
 		if (dir.y > 0 && dir.y > dir.x) {
 			
 		}
+
+		if(combo > 0){
+			combo -= 1;
+		}
+
+
+
 		LookAtDir();
 		GetAxisInput();
 	}
@@ -102,24 +120,25 @@ public class Player : MonoBehaviour {
 				yield return null;
 			Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
 			Shoot(dir);
-			yield return new WaitForSeconds(fireRate);
+			yield return new WaitForSeconds(1f / fireRate);
 		}
 	}
 
 	private void Shoot(Vector2 dir) {
 		// Debug.DrawLine(transform.position, transform.position + dir, Color.red, 1);
 		// Physics2D.RaycastAll(transform.position, dir, 5);
+		print("combo: " + combo + " comboStatus: " + comboStatus + " fireRate: " + fireRate);
 		GameObject o = bulletPool.GetPooledObject();
 		o.transform.position = firePoint.position;
 		o.SetActive(true);
 		o.GetComponent<Bullet>().Init(dir);
 		energy -= COST_SHOOT;
-		if(energy <= 0){
+		if(energy <= 0f){
 			Die();
 		}
 	}
 
-	public void addEnergy(float amt){
+	public void AddEnergy(float amt){
 		energy += amt;
 		//make sure player isn't going over max energy
 		if(energy > maxEnergy){
@@ -127,10 +146,18 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	public void takeEnergy(float amt){
+	public void TakeEnergy(float amt){
 		energy -= amt;
-		if(energy <= 0){
+		if(energy <= 0f){
 			Die();
+		}
+	}
+
+	public void UpdateCombo(){
+		combo = maxCombo;
+		if(comboStatus < 20){
+			comboStatus++;
+			fireRate += (originalFireRate/20f);
 		}
 	}
 

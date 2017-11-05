@@ -211,7 +211,9 @@ MonoBehaviour:
   moveSpeedMultiplier: 1
   energy: 100
   maxEnergy: 100
-  fireRate: 0.01
+  fireRate: 3
+  maxCombo: 100
+  combo: 0
 --- !u!212 &212033723702625966
 SpriteRenderer:
   m_ObjectHideFlags: 1

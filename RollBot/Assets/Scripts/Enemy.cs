@@ -69,16 +69,19 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public virtual void Die() {
+		Player player = GameManager.instance.player.GetComponent<Player>();
+		player.UpdateCombo();
 		GameObject l = lootPool.GetPooledObject();
 		l.transform.position = transform.position;
 		l.SetActive(true);
 		gameObject.SetActive(false);
+
 	}
 
 	public void OnCollisionEnter2D(Collision2D collision) {
 		Player player = GameManager.instance.player.GetComponent<Player>();
 		if (collision.collider.CompareTag("Player")) {
-			player.takeEnergy(collisionDamage);
+			player.TakeEnergy(collisionDamage);
 			Vector3 playerPos = playerTransform.position;
 			Vector3 backwardPlayerPosUnit = (transform.position - playerPos).normalized;
 			print("Destination (calculation): " + backwardPlayerPosUnit + transform.position);

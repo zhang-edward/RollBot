@@ -14,6 +14,8 @@ public class ExploderEnemy : Enemy {
 
 	public override void Die()
 	{
+		Player player = GameManager.instance.player.GetComponent<Player>();
+		player.UpdateCombo();
 		GameObject l = lootPool.GetPooledObject();
 		l.transform.position = transform.position;
 		l.SetActive(true);
