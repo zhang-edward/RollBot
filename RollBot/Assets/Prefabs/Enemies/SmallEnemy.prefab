@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4601708300791676}
   - component: {fileID: 50250729547228874}
   - component: {fileID: 61276454915385688}
-  - component: {fileID: 114912891043520474}
+  - component: {fileID: 114955900393525324}
   m_Layer: 0
   m_Name: SmallEnemy
   m_TagString: Enemy
@@ -90,7 +90,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d23cbd3035130481aa3e0d30325d9166, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   ignoreTimeScaling: 0
   paused: 0
   destroyOnFinish: 0
---- !u!114 &114912891043520474
+--- !u!114 &114955900393525324
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -177,13 +177,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1800183777740794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ac1d8cbe95144dfbbde476f0e78a29, type: 3}
+  m_Script: {fileID: 11500000, guid: bfa46c05f0d3546f185af7cf8c5b7d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 50250729547228874}
   sr: {fileID: 212742404046555058}
   playerTransform: {fileID: 0}
-  enemyTransform: {fileID: 0}
+  enemyTransform: {fileID: 4601708300791676}
   walk:
     frames:
     - {fileID: 21300000, guid: 01bada94c561b43a486cfb98c5018a2e, type: 3}

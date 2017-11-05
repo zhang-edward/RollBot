@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnergyLoot : Loot {
+	public const float BIG_ENERGY_THRESHOLD = 8;
 
+	public SimpleAnimation smallAnim, bigAnim;
 	public float energyAmount;
 	public Transform energyLootTransform;
 	public float pickupRadius;
+	public float timeAlive = 0;
 
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Player")){
@@ -14,6 +17,16 @@ public class EnergyLoot : Loot {
 			player.AddEnergy(energyAmount);
 			gameObject.SetActive(false);
 		}
+	}
+
+	void OnEnable() {
+		timeAlive = 0;
+		SimpleAnimationPlayer anim = GetComponent<SimpleAnimationPlayer>();
+		if (energyAmount > BIG_ENERGY_THRESHOLD)
+			anim.anim = bigAnim;
+		else
+			anim.anim = smallAnim;
+		anim.Play();
 	}
 
 	void Update(){
@@ -24,6 +37,11 @@ public class EnergyLoot : Loot {
 		if(distance.magnitude <= pickupRadius){
 			energyPos = Vector3.Lerp(energyPos, playerPos, 0.5f); 
 			energyLootTransform.position = energyPos;
+		}
+
+		timeAlive += Time.deltaTime;
+		if(timeAlive >= 15){
+			gameObject.SetActive(false);
 		}
 	}
 }

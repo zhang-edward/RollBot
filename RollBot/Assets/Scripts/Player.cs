@@ -141,7 +141,7 @@ public class Player : MonoBehaviour {
 
 	private void Die(){
 		gameObject.SetActive(false);
-		EffectPooler.PlayEffect(deathAnim, transform.position);
+		//EffectPooler.PlayEffect(deathAnim, transform.position);
 	}
 
 	private IEnumerator FlashRed() {

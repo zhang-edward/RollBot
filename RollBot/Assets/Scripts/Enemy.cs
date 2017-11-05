@@ -32,23 +32,17 @@ public class Enemy : MonoBehaviour {
 		health = maxHealth;
 	}
 
-	public IEnumerator Movement(){
+	protected virtual IEnumerator Movement() {
 		for(;;){
-			float vx = 0;
-			float vy = 0;
-			Vector3 playerPos = playerTransform.position;
-			Vector3 playerPosUnit = (playerPos - transform.position).normalized;
-			vx = playerPosUnit.x;
-			vy = playerPosUnit.y;
-			rb2d.velocity = new Vector2(vx, vy) * moveSpeed;
-			sr.flipX = vx < 0;
+			Vector3 dir = (playerTransform.position - transform.position).normalized;
+			rb2d.velocity = dir * moveSpeed;
+			sr.flipX = dir.x < 0;
 			yield return null;
 		}
 	}
 
-
-	public IEnumerator Bumping(Vector3 init, Vector3 dest){
-		float time = 0.5f;
+	private IEnumerator Bumping(Vector3 init, Vector3 dest) {
+		float time = 0.35f;
 		float t = 0;
 		while(t<time){
 			t+=Time.deltaTime;
@@ -72,7 +66,7 @@ public class Enemy : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 
-	public void OnCollisionEnter2D(Collision2D collision) {
+	protected virtual void OnCollisionEnter2D(Collision2D collision) {
 		Player player = GameManager.instance.player.GetComponent<Player>();
 		if (collision.collider.CompareTag("Player")) {
 			player.TakeEnergy(collisionDamage);
