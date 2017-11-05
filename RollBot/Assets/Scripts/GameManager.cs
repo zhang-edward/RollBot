@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour {
 	public Transform player;
 	public Transform enemiesFolder;
 	public SimpleAnimation spawnAnim;
-	public float spawnTimer = 2;
+	public float spawnTimer = 1;
+	public Statistics stats;
 
 	private List<Enemy> enemies = new List<Enemy>();
 
@@ -32,34 +33,36 @@ public class GameManager : MonoBehaviour {
 
 	void Start() {
 		StartCoroutine(SpawnEnemyRoutine());
+		StartCoroutine(stats.TotalTimer());
 	}
 
-	private IEnumerator SpawnEnemyRoutine() {
 
+
+	private IEnumerator SpawnEnemyRoutine() {
 		int enemyCount = 0;
 		for (;;) {
 			//float randXOffset = Random.Range(-5, 5);
 			//float randYOffset = Random.Range(-5, 5);
 			//Vector3 spawnPosition = player.position + new Vector3(randXOffset, randYOffset, 0);
-			StartCoroutine(SpawnEnemyRoutine(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]));
+			StartCoroutine(SpawnEnemyDelayed(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]));
 			enemyCount++;
-
 			//every 5 seconds, increase the rate at which monsters spawn, which is 1/spawnTimer, starting at spawnTimer = 2 (2 spawns per second)
 			if(enemyCount % 5 == 0){
 				spawnTimer++;
 			}
-			yield return new WaitForSeconds(1/spawnTimer);
+			yield return new WaitForSeconds(2/Mathf.Sqrt(spawnTimer));
 		}
 	}
 
-	private IEnumerator SpawnEnemyRoutine(GameObject prefab) {
+	private IEnumerator SpawnEnemyDelayed(GameObject prefab) {
 		float halfMapSize = MapGenerator.MAP_SIZE / 2f;
 		float randX = Random.Range(-halfMapSize + MAP_SPAWN_BUFFER, -halfMapSize + MapGenerator.MAP_SIZE - MAP_SPAWN_BUFFER);
 		float randY = Random.Range(-halfMapSize + MAP_SPAWN_BUFFER, -halfMapSize + MapGenerator.MAP_SIZE - MAP_SPAWN_BUFFER);
 		Vector3 spawnPosition = new Vector3(randX, randY);
 		EffectPooler.PlayEffect(spawnAnim, spawnPosition, false, 2.0f);
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(1.5f);
 		SpawnEnemy(spawnPosition, prefab);
+
 	}
 
 	public void SpawnEnemy(Vector3 position, GameObject prefab) {
