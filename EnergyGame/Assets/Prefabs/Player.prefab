@@ -198,7 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab8de93d550b4cf2a32bbea23c7c525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 0}
+  bulletPool: {fileID: 114613928842443310, guid: 792b9b891a1684574a060a4699b87ace,
+    type: 2}
   rb2d: {fileID: 50673459457171534}
   firePoint: {fileID: 4891344142793076}
   sr: {fileID: 212033723702625966}
@@ -217,6 +218,9 @@ MonoBehaviour:
     frames:
     - {fileID: 21300004, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
     - {fileID: 21300006, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
+    fps: 10
+  deathAnim:
+    frames: []
     fps: 10
   defaultMoveSpeed: 5
   moveSpeedMultiplier: 1

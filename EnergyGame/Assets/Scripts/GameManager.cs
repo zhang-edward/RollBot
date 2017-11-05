@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour {
 			GameObject o = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 			Enemy e = o.GetComponent<Enemy>();
 			e.playerTransform = player;
-			yield return new WaitForSeconds(2.0f);
+			yield return new WaitForSeconds(10.0f);
 		}
 	}
 }

@@ -101,7 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb2d: {fileID: 50399213869386016}
   player: {fileID: 114519413395586216, guid: 4d9169bdd710042a68fd2af16940f876, type: 2}
-  energyAmount: 100
+  energyAmount: 4
+  energyLootTransform: {fileID: 4256188854301540}
+  pickupRadius: 1
 --- !u!212 &212245544488733120
 SpriteRenderer:
   m_ObjectHideFlags: 1

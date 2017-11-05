@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
 	public SpriteRenderer sr;
 	public SimpleAnimationPlayer anim;
 	public SimpleAnimation walkU, walkSide, walkD;
+	public SimpleAnimation deathAnim;
 	[Header("Properties")]
 	public float defaultMoveSpeed;
 	public float moveSpeedMultiplier = 1f;
@@ -114,6 +115,9 @@ public class Player : MonoBehaviour {
 		o.SetActive(true);
 		o.GetComponent<Bullet>().Init(dir);
 		energy -= COST_SHOOT;
+		if(energy <= 0){
+			Die();
+		}
 	}
 
 	public void addEnergy(float amt){
@@ -123,5 +127,23 @@ public class Player : MonoBehaviour {
 			energy = maxEnergy;
 		}
 	}
+
+	public void takeEnergy(float amt){
+		energy -= amt;
+		if(energy <= 0){
+			Die();
+		}
+	}
+
+	private void Die(){
+		gameObject.SetActive(false);
+		EffectPooler.PlayEffect(deathAnim, transform.position);
+	}
+
+	/* bump "feature", has confict w/ velocity updates in Update()
+	public void Bump(Vector3 initial, Vector3 target){
+		firePoint.position = Vector3.Lerp(initial, target, 1);
+	}
+	*/
 
 }
