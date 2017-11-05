@@ -9,7 +9,7 @@ public class EnergyLoot : Loot {
 	public float energyAmount;
 	public Transform energyLootTransform;
 	public float pickupRadius;
-	public float timeAlive = 0;
+	private float timeAlive;
 
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Player")){
@@ -40,7 +40,7 @@ public class EnergyLoot : Loot {
 		}
 
 		timeAlive += Time.deltaTime;
-		if(timeAlive >= 15){
+		if(timeAlive >= 10){
 			gameObject.SetActive(false);
 		}
 	}

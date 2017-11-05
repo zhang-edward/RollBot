@@ -7,11 +7,6 @@ public class ExploderEnemy : Enemy {
 	public SimpleAnimation explosionAnim;
 	public GameObject prefab;
 
-	protected override void Start()
-	{
-		base.Start();
-	}
-
 	public override void Die()
 	{
 		GameObject l = lootPool.GetPooledObject();
