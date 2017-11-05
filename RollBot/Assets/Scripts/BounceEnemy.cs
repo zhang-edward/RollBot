@@ -9,7 +9,12 @@ public class BounceEnemy : Enemy {
 	protected override void Start()
 	{
 		base.Start();
-		Bounce();
+		do{
+		float initX = Random.Range(-100, 100);
+		float initY = Random.Range(-100, 100);
+		dir = new Vector2(initX,initY).normalized;
+		} while(dir.magnitude == 0); //just in case it doesn't have a starting velocity
+		print("new spawn for smallEnemy: " + dir);
 	}
 
 	protected override IEnumerator Movement()

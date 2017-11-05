@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject bossPrefab;
 	public Transform player;
 	public SimpleAnimation spawnAnim;
+	public float spawnTimer = 2;
 
 	void Awake() {
 		//makes a singleton
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour {
 
 	private IEnumerator SpawnEnemyRoutine() {
 		int enemyCount = 0;
+		int bossSpawnFactor = 10;
 		for (;;) {
 			//float randXOffset = Random.Range(-5, 5);
 			//float randYOffset = Random.Range(-5, 5);
@@ -39,16 +41,22 @@ public class GameManager : MonoBehaviour {
 			yield return new WaitForSeconds(2.0f);
 			SpawnEnemy(spawnPosition, enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]);
 			enemyCount++;
-			if (enemyCount % 10 == 0)
+
+			//every 5 seconds, increase the rate at which monsters spawn, which is 1/spawnTimer, starting at spawnTimer = 2 (2 spawns per second)
+			if(enemyCount % 5 == 0){
+				spawnTimer++;
+			}
+
+			if (enemyCount % bossSpawnFactor == 0)
 			{
 				randX = Random.Range(-halfMapSize + MAP_SPAWN_BUFFER, -halfMapSize + MapGenerator.MAP_SIZE - MAP_SPAWN_BUFFER);
 				randY = Random.Range(-halfMapSize + MAP_SPAWN_BUFFER, -halfMapSize + MapGenerator.MAP_SIZE - MAP_SPAWN_BUFFER);
 				spawnPosition = new Vector3(randX, randY);
 				EffectPooler.PlayEffect(spawnAnim, spawnPosition, false, 2.0f);
 				yield return new WaitForSeconds(2.0f);
-				SpawnEnemy(spawnPosition, enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]);
+				SpawnEnemy(spawnPosition, bossPrefab);
 			}
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(1/spawnTimer);
 		}
 	}
 

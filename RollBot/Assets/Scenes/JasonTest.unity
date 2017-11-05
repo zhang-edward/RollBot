@@ -523,6 +523,21 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 94171807}
+    - target: {fileID: 114096994860658828, guid: d1d1e1e9ad47f4e5f800e70a7fe66459,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114096994860658828, guid: d1d1e1e9ad47f4e5f800e70a7fe66459,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.95862055
+      objectReference: {fileID: 0}
+    - target: {fileID: 114096994860658828, guid: d1d1e1e9ad47f4e5f800e70a7fe66459,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1d1e1e9ad47f4e5f800e70a7fe66459, type: 2}
   m_IsPrefabParent: 0
@@ -983,6 +998,7 @@ MonoBehaviour:
     - {fileID: 21300004, guid: e6994c0c6530f43e2a96b48c98033a4d, type: 3}
     - {fileID: 21300006, guid: e6994c0c6530f43e2a96b48c98033a4d, type: 3}
     fps: 10
+  spawnTimer: 2
 --- !u!1001 &1793225725
 Prefab:
   m_ObjectHideFlags: 0

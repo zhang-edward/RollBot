@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	public const float COST_SPRINT = 2f;				// Energy cost per second
-	private const float COST_SHOOT = 1f;				// Energy cost per shot
+	private const float COST_SHOOT = 5f;				// Energy cost per shot
 	private const float SPRINT_SPEED_MULTIPLIER = 1.5f;
 
 	public ObjectPooler bulletPool;
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
 	public float maxCombo = 100f;
 	public float combo;
 	private float comboStatus;
+	private float fireRateMultiplier = 1;
 
 	private Vector2 dir;
 	private bool sprinting = false;
@@ -133,7 +134,8 @@ public class Player : MonoBehaviour {
 		o.transform.position = firePoint.position;
 		o.SetActive(true);
 		o.GetComponent<Bullet>().Init(dir);
-		energy -= COST_SHOOT;
+		energy -= COST_SHOOT/(fireRate/(1.5f)*originalFireRate);
+
 		if(energy <= 0f){
 			Die();
 		}
@@ -163,7 +165,7 @@ public class Player : MonoBehaviour {
 		combo = maxCombo;
 		if(comboStatus < 20){
 			comboStatus++;
-			fireRate += (originalFireRate/20f);
+			fireRate += (originalFireRate/12f);
 		}
 	}
 
