@@ -52,12 +52,12 @@ public class Enemy : MonoBehaviour {
 
 
 	public IEnumerator Bumping(Vector3 init, Vector3 dest){
-		float time = 0.5f;
+		float time = 0.35f;
 		float t = 0;
 		print("Destination: " + dest);
 		while(t<time){
 			t+=Time.deltaTime;
-			transform.position = Vector3.Lerp(transform.position, dest, t/time);
+			transform.position = Vector3.Lerp(transform.position, dest, time);
 			print(transform.position);
 
 			yield return null;

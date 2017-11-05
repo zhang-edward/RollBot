@@ -7,6 +7,7 @@ public class EnergyLoot : Loot {
 	public float energyAmount;
 	public Transform energyLootTransform;
 	public float pickupRadius;
+	public float timeAlive = 0;
 
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Player")){
@@ -24,6 +25,11 @@ public class EnergyLoot : Loot {
 		if(distance.magnitude <= pickupRadius){
 			energyPos = Vector3.Lerp(energyPos, playerPos, 0.5f); 
 			energyLootTransform.position = energyPos;
+		}
+
+		timeAlive += Time.deltaTime;
+		if(timeAlive >= 15){
+			gameObject.SetActive(false);
 		}
 	}
 }
