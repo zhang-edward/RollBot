@@ -93,8 +93,6 @@ public class Player : MonoBehaviour {
 	}
 
 	public void addEnergy(float amt){
-		print("energy is: " + energy);
-		print("energy to add is: " + amt);
 		energy += amt;
 		//make sure player isn't going over max energy
 		if(energy > maxEnergy){

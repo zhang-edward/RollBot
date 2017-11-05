@@ -6,8 +6,15 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject enemyPrefab;
 	public Transform player;
+	public static GameManager instance;
 
 	void Awake() {
+		//makes a singleton
+		if(instance == null){
+			instance = this;
+		} else if(instance != this){
+			Destroy(this.gameObject);
+		}
 	}
 
 	void Start() {

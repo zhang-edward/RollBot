@@ -5,8 +5,9 @@ using UnityEngine;
 public class EnergyLoot : Loot {
 
 	public float energyAmount;
+	public Transform energyLootTransform;
 
-		void OnTriggerEnter2D(Collider2D collision) {
+	void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Player")){
 			Player player = collision.gameObject.GetComponent<Player>();
 			player.addEnergy(energyAmount);
@@ -14,5 +15,15 @@ public class EnergyLoot : Loot {
 		}
 	}
 
+	void Update(){
+		Transform playerTransform = GameManager.instance.player;
+		Vector3 playerPos = playerTransform.position;
+		Vector3 energyPos = energyLootTransform.position;
+		Vector3 distance = playerPos - energyPos;
+		if(distance.magnitude <= 1f){
+			energyPos = Vector3.Lerp(energyPos, playerPos, 0.5f); 
+			energyLootTransform.position = energyPos;
+		}
+	}
 }
 
