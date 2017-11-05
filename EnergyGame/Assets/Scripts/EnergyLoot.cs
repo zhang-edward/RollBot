@@ -6,6 +6,7 @@ public class EnergyLoot : Loot {
 
 	public float energyAmount;
 	public Transform energyLootTransform;
+	public float pickupRadius;
 
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Player")){
@@ -20,7 +21,7 @@ public class EnergyLoot : Loot {
 		Vector3 playerPos = playerTransform.position;
 		Vector3 energyPos = energyLootTransform.position;
 		Vector3 distance = playerPos - energyPos;
-		if(distance.magnitude <= 1f){
+		if(distance.magnitude <= pickupRadius){
 			energyPos = Vector3.Lerp(energyPos, playerPos, 0.5f); 
 			energyLootTransform.position = energyPos;
 		}

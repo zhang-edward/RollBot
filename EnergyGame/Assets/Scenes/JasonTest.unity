@@ -228,6 +228,21 @@ Prefab:
       propertyPath: bulletPool
       value: 
       objectReference: {fileID: 1527913696}
+    - target: {fileID: 50673459457171534, guid: 4d9169bdd710042a68fd2af16940f876,
+        type: 2}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50673459457171534, guid: 4d9169bdd710042a68fd2af16940f876,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114519413395586216, guid: 4d9169bdd710042a68fd2af16940f876,
+        type: 2}
+      propertyPath: fireRate
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d9169bdd710042a68fd2af16940f876, type: 2}
   m_IsPrefabParent: 0
@@ -465,7 +480,7 @@ RectTransform:
   m_GameObject: {fileID: 978544176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 80}
-  m_LocalScale: {x: 0.037593983, y: 0.037593983, z: 0.037593983}
+  m_LocalScale: {x: 0.022727273, y: 0.022727273, z: 0.022727273}
   m_Children:
   - {fileID: 2002552398}
   m_Father: {fileID: 0}

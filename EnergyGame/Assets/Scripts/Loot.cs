@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Loot : MonoBehaviour {
 	public Rigidbody2D rb2d;
-	public Player player;
-
 
 	void Awake() {
 		rb2d = GetComponent<Rigidbody2D>();
@@ -20,6 +18,7 @@ public class Loot : MonoBehaviour {
 		Player playerCollision = collision.gameObject.GetComponent<Player>();
 		if (collision.CompareTag("Player")) {
 			gameObject.SetActive(false);
+			Player player = collision.gameObject.GetComponent<Player>();
 		}
 	}
 

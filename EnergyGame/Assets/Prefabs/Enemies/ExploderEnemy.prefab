@@ -169,6 +169,7 @@ MonoBehaviour:
   rb2d: {fileID: 50007433679134696}
   sr: {fileID: 212025259462474484}
   playerTransform: {fileID: 0}
+  enemyTransform: {fileID: 0}
   walk:
     frames:
     - {fileID: 21300000, guid: 57303f6b9ce194f46ab63a08f5e35396, type: 3}
@@ -179,6 +180,8 @@ MonoBehaviour:
   anim: {fileID: 114221385094791492}
   moveSpeed: 2
   maxHealth: 500
+  collisionDamage: 20
+  knockbackRadius: 0
   explosionAnim:
     frames:
     - {fileID: 21300000, guid: e13e2aa07cbbc4629a91803db1553376, type: 3}
