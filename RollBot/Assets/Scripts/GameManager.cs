@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 	public Transform player;
 	public Transform enemiesFolder;
 	public SimpleAnimation spawnAnim;
+	public float spawnTimer = 2;
 
 	private List<Enemy> enemies = new List<Enemy>();
 
@@ -34,13 +35,20 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private IEnumerator SpawnEnemyRoutine() {
+
+		int enemyCount = 0;
 		for (;;) {
-			while (enemies.Count >= maxEnemiesCap)
-				yield return null;
-			GameObject toSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-			StartCoroutine(SpawnEnemyRoutine(toSpawn));
-			//StartCoroutine(SpawnEnemyRoutine(bossPrefab));
-			yield return new WaitForSeconds(spawnRate);
+			//float randXOffset = Random.Range(-5, 5);
+			//float randYOffset = Random.Range(-5, 5);
+			//Vector3 spawnPosition = player.position + new Vector3(randXOffset, randYOffset, 0);
+			StartCoroutine(SpawnEnemyRoutine(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]));
+			enemyCount++;
+
+			//every 5 seconds, increase the rate at which monsters spawn, which is 1/spawnTimer, starting at spawnTimer = 2 (2 spawns per second)
+			if(enemyCount % 5 == 0){
+				spawnTimer++;
+			}
+			yield return new WaitForSeconds(1/spawnTimer);
 		}
 	}
 

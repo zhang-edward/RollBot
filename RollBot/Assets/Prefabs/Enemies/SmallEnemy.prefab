@@ -190,7 +190,7 @@ MonoBehaviour:
     - {fileID: 21300002, guid: 01bada94c561b43a486cfb98c5018a2e, type: 3}
     fps: 10
   anim: {fileID: 114842058657070470}
-  moveSpeed: 5
+  moveSpeed: 10
   maxHealth: 50
   collisionDamage: 5
   knockbackRadius: 0
