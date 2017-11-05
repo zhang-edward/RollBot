@@ -11,7 +11,7 @@ public class EnergyLoot : Loot {
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Player")){
 			Player player = collision.gameObject.GetComponent<Player>();
-			player.addEnergy(energyAmount);
+			player.AddEnergy(energyAmount);
 			gameObject.SetActive(false);
 		}
 	}

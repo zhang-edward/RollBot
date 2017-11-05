@@ -50,12 +50,9 @@ public class Enemy : MonoBehaviour {
 	public IEnumerator Bumping(Vector3 init, Vector3 dest){
 		float time = 0.5f;
 		float t = 0;
-		print("Destination: " + dest);
 		while(t<time){
 			t+=Time.deltaTime;
 			transform.position = Vector3.Lerp(transform.position, dest, t/time);
-			print(transform.position);
-
 			yield return null;
 		}
 		movementRoutine = StartCoroutine(Movement());
@@ -78,21 +75,13 @@ public class Enemy : MonoBehaviour {
 	public void OnCollisionEnter2D(Collision2D collision) {
 		Player player = GameManager.instance.player.GetComponent<Player>();
 		if (collision.collider.CompareTag("Player")) {
-			player.takeEnergy(collisionDamage);
+			player.TakeEnergy(collisionDamage);
 			Vector3 playerPos = playerTransform.position;
 			Vector3 backwardPlayerPosUnit = (transform.position - playerPos).normalized;
-			print("Destination (calculation): " + backwardPlayerPosUnit + transform.position);
 			StopCoroutine(movementRoutine);
 			if (bumpRoutine != null)
 				StopCoroutine(bumpRoutine);
 			bumpRoutine = StartCoroutine(Bumping(transform.position, (backwardPlayerPosUnit + transform.position)));
 		}
-
-		/* player.bump() feature DEPRECATED
-		Vector3 playerPos = playerTransform.position;
-		Vector3 playerPosUnit = playerTransform.position.normalized;
-		Vector3 bumpPosUnit = (playerTransform).position.normalized;
-		player.Bump(playerPos,playerPos+playerPosUnit*knockbackRadius);
-		*/
 	}
 }

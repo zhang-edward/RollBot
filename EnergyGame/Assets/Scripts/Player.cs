@@ -22,6 +22,7 @@ public class Player : MonoBehaviour {
 	public float energy;
 	public float maxEnergy = 100f;
 	public float fireRate = 0.1f;
+	private bool invincible = false;
 
 	private Vector2 dir;
 	private bool sprinting = false;
@@ -119,7 +120,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	public void addEnergy(float amt){
+	public void AddEnergy(float amt){
 		energy += amt;
 		//make sure player isn't going over max energy
 		if(energy > maxEnergy){
@@ -127,8 +128,12 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	public void takeEnergy(float amt){
+	public void TakeEnergy(float amt){
+		if (invincible)
+			return;
 		energy -= amt;
+		CameraControl.instance.StartShake(0.05f, 0.05f, true, true);
+		StartCoroutine(FlashRed());
 		if(energy <= 0){
 			Die();
 		}
@@ -139,10 +144,12 @@ public class Player : MonoBehaviour {
 		EffectPooler.PlayEffect(deathAnim, transform.position);
 	}
 
-	/* bump "feature", has confict w/ velocity updates in Update()
-	public void Bump(Vector3 initial, Vector3 target){
-		firePoint.position = Vector3.Lerp(initial, target, 1);
+	private IEnumerator FlashRed() {
+		sr.color = Color.red;
+		invincible = true;
+		yield return new WaitForSeconds(0.5f);
+		sr.color = Color.white;
+		invincible = false;
 	}
-	*/
 
 }

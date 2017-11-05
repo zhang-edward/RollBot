@@ -904,6 +904,13 @@ MonoBehaviour:
   - {fileID: 1573224000683354, guid: 5fe0cc669e9b247eca71a374605512ba, type: 2}
   bossPrefab: {fileID: 1882952416697182, guid: 8e08728ec25c14189b9e1c9695bb71b9, type: 2}
   player: {fileID: 565858345}
+  spawnAnim:
+    frames:
+    - {fileID: 21300000, guid: e6994c0c6530f43e2a96b48c98033a4d, type: 3}
+    - {fileID: 21300002, guid: e6994c0c6530f43e2a96b48c98033a4d, type: 3}
+    - {fileID: 21300004, guid: e6994c0c6530f43e2a96b48c98033a4d, type: 3}
+    - {fileID: 21300006, guid: e6994c0c6530f43e2a96b48c98033a4d, type: 3}
+    fps: 10
 --- !u!4 &1535432089
 Transform:
   m_ObjectHideFlags: 0
@@ -1019,12 +1026,12 @@ Prefab:
     - target: {fileID: 224826309445314550, guid: 30c2de507596f4638b2cc7f273ee472f,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -188
+      value: -191.2491
       objectReference: {fileID: 0}
     - target: {fileID: 224826309445314550, guid: 30c2de507596f4638b2cc7f273ee472f,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -100.5
+      value: -102.32762
       objectReference: {fileID: 0}
     - target: {fileID: 224826309445314550, guid: 30c2de507596f4638b2cc7f273ee472f,
         type: 2}
