@@ -5,12 +5,17 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	public Rigidbody2D rb2d;
+	public SpriteRenderer sr;
 	public Transform playerTransform;
+	public SimpleAnimation walk;
+	public SimpleAnimationPlayer anim;
 	public float moveSpeed;
 	private ObjectPooler lootPool;
 
 	void Start() {
 		lootPool = ObjectPooler.GetObjectPooler("Loot");
+		anim.anim = walk;
+		anim.Play();
 	}
 
 	void Update(){
@@ -21,6 +26,7 @@ public class Enemy : MonoBehaviour {
 		vx = playerPosUnit.x;
 		vy = playerPosUnit.y;
 		rb2d.velocity = new Vector2(vx, vy) * moveSpeed;
+		sr.flipX = vx < 0;
 	}
 
 	public void Die() {

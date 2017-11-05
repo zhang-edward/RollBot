@@ -12,6 +12,7 @@ public class SimpleAnimationPlayer : MonoBehaviour {
 	public bool looping;
 	public bool ignoreTimeScaling;
 	public bool isPlaying { get; private set; }
+	public bool paused;
 
 	public bool destroyOnFinish;
 
@@ -59,6 +60,8 @@ public class SimpleAnimationPlayer : MonoBehaviour {
 				if (frameIndex >= anim.frames.Length)
 					frameIndex = 0;
 			}
+			while (paused)
+				yield return null;
 			if (ignoreTimeScaling)
 				yield return new WaitForSecondsRealtime(anim.SecondsPerFrame);
 			else

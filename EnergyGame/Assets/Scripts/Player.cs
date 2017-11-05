@@ -11,6 +11,10 @@ public class Player : MonoBehaviour {
 	public ObjectPooler bulletPool;
 	public Rigidbody2D rb2d;
 	public Transform firePoint;
+	[Header("Sprite and Animation")]
+	public SpriteRenderer sr;
+	public SimpleAnimationPlayer anim;
+	public SimpleAnimation walkU, walkSide, walkD;
 	[Header("Properties")]
 	public float defaultMoveSpeed;
 	public float moveSpeedMultiplier = 1f;
@@ -18,6 +22,7 @@ public class Player : MonoBehaviour {
 	public float maxEnergy = 100f;
 	public float fireRate = 0.1f;
 
+	private Vector2 dir;
 	private bool sprinting = false;
 	private float moveSpeed {
 		get {
@@ -32,6 +37,8 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(ShootRoutine());
+		anim.anim = walkD;
+		anim.Play();
 	}
 
 	// Update is called once per frame
@@ -54,20 +61,36 @@ public class Player : MonoBehaviour {
 		{
 			energy -= Time.deltaTime * COST_SPRINT;
 		}
-		Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-		LookAtDir(dir);
+		dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+		if (dir.y > 0 && dir.y > dir.x) {
+			
+		}
+		LookAtDir();
 		GetAxisInput();
 	}
 
 	private void GetAxisInput() {
 		float vx = Input.GetAxisRaw("Horizontal");
 		float vy = Input.GetAxisRaw("Vertical");
-		rb2d.velocity = new Vector2(vx, vy).normalized * moveSpeed;
+		Vector2 velocity = new Vector2(vx, vy);
+		rb2d.velocity = velocity.normalized * moveSpeed;
+		if (velocity.magnitude <= 0)
+			anim.paused = true;
+		else
+			anim.paused = false;
 	}
 
-	private void LookAtDir(Vector2 dir){
-		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler(0, 0, angle);
+	private void LookAtDir(){
+		if (Mathf.Abs(dir.y) > Mathf.Abs(dir.x)) {      // If the player is mostly facing up
+			if (dir.y > 0)
+				anim.anim = walkU;
+			else
+				anim.anim = walkD;
+		}
+		else {
+			anim.anim = walkSide;
+			sr.flipX = dir.x < 0;
+		}
 	}
 
 	private IEnumerator ShootRoutine()
@@ -75,8 +98,9 @@ public class Player : MonoBehaviour {
 		for (;;) {
 			while (!Input.GetMouseButton(0))
 				yield return null;
-			Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+			Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
 			Shoot(dir);
+			CameraControl.instance.StartShake(0.02f, 0.05f, true, true);
 			yield return new WaitForSeconds(fireRate);
 		}
 	}

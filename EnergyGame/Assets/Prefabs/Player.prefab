@@ -69,6 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4682822336536956}
   - component: {fileID: 212033723702625966}
+  - component: {fileID: 114184068313799024}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -112,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 1861139461836582}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4605411939726632}
   m_Father: {fileID: 4593089852654752}
@@ -166,6 +167,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.35
+--- !u!114 &114184068313799024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1861139461836582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50dff18d55f54c55abd525251724237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 212033723702625966}
+  anim:
+    frames: []
+    fps: 10
+  playOnStart: 0
+  looping: 1
+  ignoreTimeScaling: 0
+  paused: 0
+  destroyOnFinish: 0
 --- !u!114 &114519413395586216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,6 +201,23 @@ MonoBehaviour:
   bulletPool: {fileID: 0}
   rb2d: {fileID: 50673459457171534}
   firePoint: {fileID: 4891344142793076}
+  sr: {fileID: 212033723702625966}
+  anim: {fileID: 114184068313799024}
+  walkU:
+    frames:
+    - {fileID: 21300008, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
+    - {fileID: 21300010, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
+    fps: 10
+  walkSide:
+    frames:
+    - {fileID: 21300000, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
+    - {fileID: 21300002, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
+    fps: 10
+  walkD:
+    frames:
+    - {fileID: 21300004, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
+    - {fileID: 21300006, guid: b4f6fcc42ba354c958e1df47886f92c8, type: 3}
+    fps: 10
   defaultMoveSpeed: 5
   moveSpeedMultiplier: 1
   energy: 100
@@ -220,7 +258,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.022058845, g: 1, b: 0.4334685, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
