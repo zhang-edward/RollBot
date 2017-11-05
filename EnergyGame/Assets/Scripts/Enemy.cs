@@ -12,19 +12,19 @@ public class Enemy : MonoBehaviour {
 	public float moveSpeed;
 	public float maxHealth;
 	private float health;
-	private ObjectPooler lootPool;
+	protected ObjectPooler lootPool;
 
-	void Start() {
+	protected virtual void Start() {
 		anim.anim = walk;
 		anim.Play();
 		lootPool = ObjectPooler.GetObjectPooler("EnergyLoot");
 	}
 
-	void Awake(){
+	protected virtual void Awake(){
 		health = maxHealth;
 	}
 
-	void Update(){
+	protected virtual void Update(){
 		float vx = 0;
 		float vy = 0;
 		Vector3 playerPos = playerTransform.position;
@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-	public void Die() {
+	public virtual void Die() {
 		GameObject l = lootPool.GetPooledObject();
 		l.transform.position = transform.position;
 		l.SetActive(true);

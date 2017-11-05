@@ -101,7 +101,6 @@ public class Player : MonoBehaviour {
 				yield return null;
 			Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
 			Shoot(dir);
-			CameraControl.instance.StartShake(0.02f, 0.05f, true, true);
 			yield return new WaitForSeconds(fireRate);
 		}
 	}
