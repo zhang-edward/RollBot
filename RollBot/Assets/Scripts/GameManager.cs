@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
 	[Header("UI")]
 	public GameOverView gameOverView;
 	public GameObject startPanel;
-
+	public Statistics stats;
 
 	private List<Enemy> enemies = new List<Enemy>();
 
@@ -57,11 +57,11 @@ public class GameManager : MonoBehaviour {
 
 	public void StartGame() {
 		StartCoroutine(SpawnEnemyRoutine());
+		StartCoroutine(stats.TotalTimer());
 		gameStarted = true;
 	}
 
 	private IEnumerator SpawnEnemyRoutine() {
-
 		int enemyCount = 0;
 		for (;;) {
 			//float randXOffset = Random.Range(-5, 5);
@@ -69,12 +69,11 @@ public class GameManager : MonoBehaviour {
 			//Vector3 spawnPosition = player.position + new Vector3(randXOffset, randYOffset, 0);
 			StartCoroutine(SpawnEnemyDelayed(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]));
 			enemyCount++;
-
 			//every 5 seconds, increase the rate at which monsters spawn, which is 1/spawnTimer, starting at spawnTimer = 2 (2 spawns per second)
 			if(enemyCount % 5 == 0){
 				spawnTimer++;
 			}
-			yield return new WaitForSeconds(4/spawnTimer);
+			yield return new WaitForSeconds(2/Mathf.Sqrt(spawnTimer));
 		}
 	}
 
@@ -84,8 +83,9 @@ public class GameManager : MonoBehaviour {
 		float randY = Random.Range(-halfMapSize + MAP_SPAWN_BUFFER, -halfMapSize + MapGenerator.MAP_SIZE - MAP_SPAWN_BUFFER);
 		Vector3 spawnPosition = new Vector3(randX, randY);
 		EffectPooler.PlayEffect(spawnAnim, spawnPosition, false, 2.0f);
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(1.5f);
 		SpawnEnemy(spawnPosition, prefab);
+
 	}
 
 	public void SpawnEnemy(Vector3 position, GameObject prefab) {

@@ -6,12 +6,6 @@ public class ExploderEnemy : Enemy {
 
 	public GameObject prefab;
 
-	public override void Die()
-	{
-		base.Die();
-		StartCoroutine(ExplodeRoutine());
-	}
-
 	private IEnumerator ExplodeRoutine() {
 		EffectPooler.PlayEffect(explosionAnim, transform.position, false, 0);
 		playerTransform = transform;
