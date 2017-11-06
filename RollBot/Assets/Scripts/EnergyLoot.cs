@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnergyLoot : Loot {
-	public const float BIG_ENERGY_THRESHOLD = 8;
+	public const float BIG_ENERGY_THRESHOLD = 7;
 
 	public SimpleAnimation smallAnim, bigAnim;
 	public float energyAmount;

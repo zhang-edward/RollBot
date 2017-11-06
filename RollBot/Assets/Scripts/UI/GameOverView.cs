@@ -7,7 +7,7 @@ public class GameOverView : MonoBehaviour {
 
 	public Text enemiesText, scoreText, timeText;
 
-	public void ShowScore(int enemies, int score, int time) {
+	public void ShowScore(int enemies, float score, float time) {
 		gameObject.SetActive(true);
 		enemiesText.text = "Enemies: " + enemies.ToString();
 		scoreText.text = "Score: " + score.ToString();

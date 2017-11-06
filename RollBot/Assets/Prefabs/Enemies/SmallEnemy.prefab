@@ -190,11 +190,12 @@ MonoBehaviour:
     - {fileID: 21300002, guid: 01bada94c561b43a486cfb98c5018a2e, type: 3}
     fps: 10
   anim: {fileID: 114842058657070470}
-  moveSpeed: 10
+  moveSpeed: 7
   maxHealth: 50
   energyDropAmount: 2
   collisionDamage: 5
   knockbackRadius: 0
+  deathSound: {fileID: 8300000, guid: 3e7398c3f7d0f4e8b8caefb74dde2e9e, type: 3}
   explosionAnim:
     frames:
     - {fileID: 21300000, guid: 5d7ba8e8176894533a7148468a4d3a62, type: 3}

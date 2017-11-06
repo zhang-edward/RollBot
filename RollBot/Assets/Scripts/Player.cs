@@ -159,6 +159,7 @@ public class Player : MonoBehaviour {
 			return;
 		SoundManager.RandomizeSFX(hurtSound);
 		energy -= amt;
+		combo = 0;
 		CameraControl.instance.StartShake(0.1f, 0.05f, true, true);
 		StartCoroutine(FlashRed());
 		energy -= amt;
