@@ -18,8 +18,13 @@ public class Enemy : MonoBehaviour {
 	public float knockbackRadius;
 	private bool isBumped;
 
-	private Coroutine movementRoutine;
-	private Coroutine bumpRoutine;
+	public AudioClip deathSound;
+
+	public SimpleAnimation explosionAnim;
+>>>>>>> d30c6d593524d1deb61692639378889f7a82899a
+
+	protected Coroutine movementRoutine;
+	protected Coroutine bumpRoutine;
 
 	protected virtual void Start() {
 		anim.anim = walk;
@@ -88,11 +93,26 @@ public class Enemy : MonoBehaviour {
 			bumpRoutine = StartCoroutine(Bumping(transform.position, (backwardPlayerPosUnit + transform.position)));
 		}
 
+<<<<<<< HEAD
 		/* player.bump() feature DEPRECATED
 		Vector3 playerPos = playerTransform.position;
 		Vector3 playerPosUnit = playerTransform.position.normalized;
 		Vector3 bumpPosUnit = (playerTransform).position.normalized;
 		player.Bump(playerPos,playerPos+playerPosUnit*knockbackRadius);
 		*/
+=======
+	protected virtual IEnumerator ExplodeRoutine()
+	{
+		if (bumpRoutine != null)
+			StopCoroutine(bumpRoutine);
+		if (movementRoutine != null)
+			StopCoroutine(movementRoutine);
+		rb2d.velocity = Vector2.zero;
+		EffectPooler.PlayEffect(explosionAnim, transform.position, false, 0);
+		SoundManager.RandomizeSFX(deathSound);
+		playerTransform = transform;
+		yield return new WaitForSeconds(explosionAnim.GetSecondsUntilFrame(2));
+		gameObject.SetActive(false);
+>>>>>>> d30c6d593524d1deb61692639378889f7a82899a
 	}
 }
