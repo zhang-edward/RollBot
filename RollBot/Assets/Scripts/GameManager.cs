@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -11,13 +12,17 @@ public class GameManager : MonoBehaviour {
 	[Header("Properties")]
 	public float spawnRate = 1.0f;
 	public int maxEnemiesCap = 10;
+	public bool gameStarted;
 	[Header("Prefabs")]
 	public GameObject[] enemyPrefabs;
 	public GameObject bossPrefab;
 	public Transform player;
 	public Transform enemiesFolder;
 	public SimpleAnimation spawnAnim;
-	public float spawnTimer = 1;
+	public float spawnTimer = 2;
+	[Header("UI")]
+	public GameOverView gameOverView;
+	public GameObject startPanel;
 	public Statistics stats;
 
 	private List<Enemy> enemies = new List<Enemy>();
@@ -31,12 +36,30 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void Start() {
-		StartCoroutine(SpawnEnemyRoutine());
-		StartCoroutine(stats.TotalTimer());
+	private void OnEnable()
+	{
+		player.GetComponent<Player>().OnPlayerDied += ShowGameOverView;
 	}
 
+	private void OnDisable()
+	{
+		player.GetComponent<Player>().OnPlayerDied -= ShowGameOverView;
+	}
 
+	public void Restart()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
+	public void ShowGameOverView() {
+		gameOverView.ShowScore(0, 0, 0);
+	}
+
+	public void StartGame() {
+		StartCoroutine(SpawnEnemyRoutine());
+		StartCoroutine(stats.TotalTimer());
+		gameStarted = true;
+	}
 
 	private IEnumerator SpawnEnemyRoutine() {
 		int enemyCount = 0;

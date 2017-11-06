@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114842058657070470}
   - component: {fileID: 114322977543761022}
   - component: {fileID: 58304303629947018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,8 +192,20 @@ MonoBehaviour:
   anim: {fileID: 114842058657070470}
   moveSpeed: 10
   maxHealth: 50
+  energyDropAmount: 2
   collisionDamage: 5
   knockbackRadius: 0
+  explosionAnim:
+    frames:
+    - {fileID: 21300000, guid: 5d7ba8e8176894533a7148468a4d3a62, type: 3}
+    - {fileID: 21300002, guid: 5d7ba8e8176894533a7148468a4d3a62, type: 3}
+    - {fileID: 21300004, guid: 5d7ba8e8176894533a7148468a4d3a62, type: 3}
+    - {fileID: 21300006, guid: 5d7ba8e8176894533a7148468a4d3a62, type: 3}
+    - {fileID: 21300008, guid: 5d7ba8e8176894533a7148468a4d3a62, type: 3}
+    - {fileID: 21300010, guid: 5d7ba8e8176894533a7148468a4d3a62, type: 3}
+    - {fileID: 21300012, guid: 5d7ba8e8176894533a7148468a4d3a62, type: 3}
+    - {fileID: 21300014, guid: 5d7ba8e8176894533a7148468a4d3a62, type: 3}
+    fps: 15
 --- !u!212 &212742404046555058
 SpriteRenderer:
   m_ObjectHideFlags: 1

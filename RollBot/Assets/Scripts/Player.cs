@@ -33,7 +33,6 @@ public class Player : MonoBehaviour {
 	public float maxCombo = 100f;
 	public float combo;
 	private float comboStatus;
-	private float fireRateMultiplier = 1;
 
 	private Vector2 dir;
 	private bool sprinting = false;
@@ -42,6 +41,9 @@ public class Player : MonoBehaviour {
 			return defaultMoveSpeed * moveSpeedMultiplier;
 		}
 	}
+
+	public delegate void OnPlayerStateChanged();
+	public event OnPlayerStateChanged OnPlayerDied;
 
 	void Awake() {
 		energy = maxEnergy;
@@ -60,6 +62,8 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+		if (!GameManager.instance.gameStarted)
+			return;
 		if(combo <= 0f){
 			fireRate = originalFireRate;
 			comboStatus = 0;
@@ -116,6 +120,8 @@ public class Player : MonoBehaviour {
 	private IEnumerator ShootRoutine()
 	{
 		for (;;) {
+			while (!GameManager.instance.gameStarted)
+				yield return null;
 			while (!Input.GetMouseButton(0))
 				yield return null;
 			Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
@@ -127,7 +133,7 @@ public class Player : MonoBehaviour {
 	private void Shoot(Vector2 dir) {
 		// Debug.DrawLine(transform.position, transform.position + dir, Color.red, 1);
 		// Physics2D.RaycastAll(transform.position, dir, 5);
-		print("combo: " + combo + " comboStatus: " + comboStatus + " fireRate: " + fireRate);
+//		print("combo: " + combo + " comboStatus: " + comboStatus + " fireRate: " + fireRate);
 		GameObject o = bulletPool.GetPooledObject();
 		o.transform.position = firePoint.position;
 		o.SetActive(true);
@@ -172,6 +178,8 @@ public class Player : MonoBehaviour {
 	private void Die(){
 		gameObject.SetActive(false);
 		SoundManager.RandomizeSFX(dieSound);
+		if (OnPlayerDied != null)
+			OnPlayerDied();
 		//EffectPooler.PlayEffect(deathAnim, transform.position);
 	}
 

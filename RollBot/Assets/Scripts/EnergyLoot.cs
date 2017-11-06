@@ -44,5 +44,9 @@ public class EnergyLoot : Loot {
 			gameObject.SetActive(false);
 		}
 	}
+
+	public void SetEnergy(float amt) {
+		energyAmount = amt;
+	}
 }
 

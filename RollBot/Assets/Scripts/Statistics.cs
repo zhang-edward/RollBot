@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Statistics : MonoBehaviour{
-	public static int enemiesKilled = 0;
-	public static float timeAlive = 0;
-	public static float totalScore = 0;
+	public int enemiesKilled = 0;
+	public float timeAlive = 0;
+	public float totalScore = 0;
 	public TimeSeconds seconds;
 	public TimeMinutes minutes;
 	public TimeTenSeconds tenSeconds;
 
-	public static void UpdateEnemiesKilled(){
+	public void UpdateEnemiesKilled(){
 		enemiesKilled++;
 	}
 
-	public static void AddTime(){
+	public void AddTime(){
 		timeAlive++;
 	}
 
-	public static float GetTime(){
+	public float GetTime(){
 		return timeAlive;
 	}
 
 	public IEnumerator TotalTimer(){
+		print("this");
 		for(;;){
 			AddTime();
 			seconds.UpdateSeconds();
@@ -32,7 +33,6 @@ public class Statistics : MonoBehaviour{
 				minutes.UpdateMinutes();
 			yield return new WaitForSeconds(1f);
 		}
-
 	}
 }
 

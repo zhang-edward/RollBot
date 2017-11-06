@@ -117,7 +117,7 @@ MonoBehaviour:
     - {fileID: 21300008, guid: f4825783af86e414097e46eb185de794, type: 3}
     - {fileID: 21300010, guid: f4825783af86e414097e46eb185de794, type: 3}
     fps: 10
-  energyAmount: 5
+  energyAmount: 3
   energyLootTransform: {fileID: 4256188854301540}
   pickupRadius: 1
 --- !u!114 &114494638717035094

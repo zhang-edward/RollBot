@@ -4,18 +4,7 @@ using UnityEngine;
 
 public class ExploderEnemy : Enemy {
 
-	public SimpleAnimation explosionAnim;
 	public GameObject prefab;
-
-	public override void Die()
-	{
-		Player player = GameManager.instance.player.GetComponent<Player>();
-		player.UpdateCombo();
-		GameObject l = lootPool.GetPooledObject();
-		l.transform.position = transform.position;
-		l.SetActive(true);
-		StartCoroutine(ExplodeRoutine());
-	}
 
 	private IEnumerator ExplodeRoutine() {
 		EffectPooler.PlayEffect(explosionAnim, transform.position, false, 0);
