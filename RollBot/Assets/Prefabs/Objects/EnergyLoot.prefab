@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61369071943521014}
   - component: {fileID: 114177472819133256}
   - component: {fileID: 114494638717035094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnergyLoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ MonoBehaviour:
     fps: 10
   energyAmount: 3
   energyLootTransform: {fileID: 4256188854301540}
-  pickupRadius: 1
+  pickupRadius: 2
 --- !u!114 &114494638717035094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,9 +175,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingLayerID: -1717736015
+  m_SortingLayer: -1
+  m_SortingOrder: 200
   m_Sprite: {fileID: 21300012, guid: f4825783af86e414097e46eb185de794, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -5,7 +5,11 @@ using UnityEngine;
 public class Statistics : MonoBehaviour{
 	public int enemiesKilled = 0;
 	public float timeAlive = 0;
-	public float totalScore = 0;
+	public float totalScore {
+		get {
+			return enemiesKilled * 1.5f + timeAlive;
+		}
+	}
 	public TimeSeconds seconds;
 	public TimeMinutes minutes;
 	public TimeTenSeconds tenSeconds;

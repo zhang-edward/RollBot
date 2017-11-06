@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void ShowGameOverView() {
-		gameOverView.ShowScore(0, 0, 0);
+		gameOverView.ShowScore(stats.enemiesKilled, stats.totalScore, stats.timeAlive);
 	}
 
 	public void StartGame() {
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour {
 			if(enemyCount % 5 == 0){
 				spawnTimer++;
 			}
-			yield return new WaitForSeconds(2/Mathf.Sqrt(spawnTimer));
+			yield return new WaitForSeconds(3/Mathf.Sqrt(spawnTimer));
 		}
 	}
 
@@ -106,5 +106,6 @@ public class GameManager : MonoBehaviour {
 
 	public void RemoveEnemy(Enemy e) {
 		enemies.Remove(e);
+		stats.UpdateEnemiesKilled();
 	}
 }
