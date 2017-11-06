@@ -24,7 +24,7 @@ public class Statistics : MonoBehaviour{
 
 	public IEnumerator TotalTimer(){
 		for(;;){
-			Statistics.AddTime();
+			AddTime();
 			seconds.UpdateSeconds();
 			if(GetTime() % ((int) 10) == 0)
 				tenSeconds.UpdateTenSeconds();
