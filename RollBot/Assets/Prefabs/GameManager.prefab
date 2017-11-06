@@ -408,12 +408,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcf42cc654b34543a890caabf726a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnRate: 1
+  maxEnemiesCap: 10
   enemyPrefabs:
   - {fileID: 1573224000683354, guid: 5fe0cc669e9b247eca71a374605512ba, type: 2}
   - {fileID: 1325326444229290, guid: db674500581984c8c936f1b873a7b83d, type: 2}
   - {fileID: 1800183777740794, guid: cb944d90100a647f09005461168b0263, type: 2}
   bossPrefab: {fileID: 1882952416697182, guid: 8e08728ec25c14189b9e1c9695bb71b9, type: 2}
   player: {fileID: 0}
+  enemiesFolder: {fileID: 0}
   spawnAnim:
     frames:
     - {fileID: 21300000, guid: e6994c0c6530f43e2a96b48c98033a4d, type: 3}
@@ -421,6 +424,9 @@ MonoBehaviour:
     - {fileID: 21300004, guid: e6994c0c6530f43e2a96b48c98033a4d, type: 3}
     - {fileID: 21300006, guid: e6994c0c6530f43e2a96b48c98033a4d, type: 3}
     fps: 10
+  spawnTimer: 2
+  gameOverView: {fileID: 0}
+  startPanel: {fileID: 0}
 --- !u!114 &114559186075787314
 MonoBehaviour:
   m_ObjectHideFlags: 1

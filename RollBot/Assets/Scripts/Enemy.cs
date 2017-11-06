@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour {
 	public float collisionDamage;
 	public float knockbackRadius;
 
+	public SimpleAnimation explosionAnim;
+
 	private Coroutine movementRoutine;
 	private Coroutine bumpRoutine;
 
@@ -67,9 +69,9 @@ public class Enemy : MonoBehaviour {
 		l.transform.position = transform.position;
 		l.GetComponent<EnergyLoot>().SetEnergy(energyDropAmount);
 		l.SetActive(true);
-		gameObject.SetActive(false);
 		GameManager.instance.RemoveEnemy(this);
-
+		GetComponent<BoxCollider2D>().enabled = false;
+		StartCoroutine(ExplodeRoutine());
 	}
 
 	protected virtual void OnCollisionEnter2D(Collision2D collision) {
@@ -90,5 +92,18 @@ public class Enemy : MonoBehaviour {
 		sr.color = Color.red;
 		yield return new WaitForSeconds(0.2f);
 		sr.color = Color.white;
+	}
+
+	private IEnumerator ExplodeRoutine()
+	{
+		if (bumpRoutine != null)
+			StopCoroutine(bumpRoutine);
+		if (movementRoutine != null)
+			StopCoroutine(movementRoutine);
+		rb2d.velocity = Vector2.zero;
+		EffectPooler.PlayEffect(explosionAnim, transform.position, false, 0);
+		playerTransform = transform;
+		yield return new WaitForSeconds(explosionAnim.GetSecondsUntilFrame(4));
+		gameObject.SetActive(false);
 	}
 }

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114221385094791492}
   - component: {fileID: 114931503073391836}
   - component: {fileID: 58564856725581970}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ MonoBehaviour:
     - {fileID: 21300018, guid: e13e2aa07cbbc4629a91803db1553376, type: 3}
     - {fileID: 21300020, guid: e13e2aa07cbbc4629a91803db1553376, type: 3}
     - {fileID: 21300022, guid: e13e2aa07cbbc4629a91803db1553376, type: 3}
-    fps: 10
+    fps: 15
   prefab: {fileID: 1800183777740794, guid: cb944d90100a647f09005461168b0263, type: 2}
 --- !u!114 &114931503073391836
 MonoBehaviour:

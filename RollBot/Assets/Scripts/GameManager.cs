@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 	[Header("Properties")]
 	public float spawnRate = 1.0f;
 	public int maxEnemiesCap = 10;
+	public bool gameStarted;
 	[Header("Prefabs")]
 	public GameObject[] enemyPrefabs;
 	public GameObject bossPrefab;
@@ -45,17 +46,18 @@ public class GameManager : MonoBehaviour {
 		player.GetComponent<Player>().OnPlayerDied -= ShowGameOverView;
 	}
 
+	public void Restart()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
 	public void ShowGameOverView() {
 		gameOverView.ShowScore(0, 0, 0);
 	}
 
 	public void StartGame() {
 		StartCoroutine(SpawnEnemyRoutine());
-	}
-
-	void Update() {
-		if (Input.GetKeyDown(KeyCode.R))
-			SceneManager.LoadScene("EdwardTest");
+		gameStarted = true;
 	}
 
 	private IEnumerator SpawnEnemyRoutine() {
