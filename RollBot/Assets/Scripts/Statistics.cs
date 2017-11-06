@@ -23,7 +23,6 @@ public class Statistics : MonoBehaviour{
 	}
 
 	public IEnumerator TotalTimer(){
-		print("this");
 		for(;;){
 			AddTime();
 			seconds.UpdateSeconds();

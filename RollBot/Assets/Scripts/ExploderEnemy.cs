@@ -6,10 +6,15 @@ public class ExploderEnemy : Enemy {
 
 	public GameObject prefab;
 
-	private IEnumerator ExplodeRoutine() {
+	protected override IEnumerator ExplodeRoutine() {
+		if (bumpRoutine != null)
+			StopCoroutine(bumpRoutine);
+		if (movementRoutine != null)
+			StopCoroutine(movementRoutine);
 		EffectPooler.PlayEffect(explosionAnim, transform.position, false, 0);
 		playerTransform = transform;
-		yield return new WaitForSeconds(explosionAnim.GetSecondsUntilFrame(4));
+		yield return new WaitForSeconds(explosionAnim.GetSecondsUntilFrame(2));
+		SoundManager.RandomizeSFX(deathSound);
 		CameraControl.instance.StartShake(0.1f, 0.1f, true, true);
 		for (int i = 0; i < 4; i ++) {
 			float randXOffset = Random.Range(-1, 1);

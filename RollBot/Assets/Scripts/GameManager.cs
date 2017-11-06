@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour {
 
 	public void StartGame() {
 		StartCoroutine(SpawnEnemyRoutine());
+		StartCoroutine(SpawnBossEnemyRoutine());
 		StartCoroutine(stats.TotalTimer());
 		gameStarted = true;
 	}
@@ -64,9 +65,6 @@ public class GameManager : MonoBehaviour {
 	private IEnumerator SpawnEnemyRoutine() {
 		int enemyCount = 0;
 		for (;;) {
-			//float randXOffset = Random.Range(-5, 5);
-			//float randYOffset = Random.Range(-5, 5);
-			//Vector3 spawnPosition = player.position + new Vector3(randXOffset, randYOffset, 0);
 			StartCoroutine(SpawnEnemyDelayed(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]));
 			enemyCount++;
 			//every 5 seconds, increase the rate at which monsters spawn, which is 1/spawnTimer, starting at spawnTimer = 2 (2 spawns per second)
@@ -74,6 +72,16 @@ public class GameManager : MonoBehaviour {
 				spawnTimer++;
 			}
 			yield return new WaitForSeconds(2/Mathf.Sqrt(spawnTimer));
+		}
+	}
+
+	private IEnumerator SpawnBossEnemyRoutine()
+	{
+		for (;;)
+		{
+			StartCoroutine(SpawnEnemyDelayed(bossPrefab));
+
+			yield return new WaitForSeconds(5);
 		}
 	}
 

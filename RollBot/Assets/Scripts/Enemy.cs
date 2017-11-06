@@ -18,10 +18,12 @@ public class Enemy : MonoBehaviour {
 	public float collisionDamage;
 	public float knockbackRadius;
 
+	public AudioClip deathSound;
+
 	public SimpleAnimation explosionAnim;
 
-	private Coroutine movementRoutine;
-	private Coroutine bumpRoutine;
+	protected Coroutine movementRoutine;
+	protected Coroutine bumpRoutine;
 
 	protected virtual void Start() {
 		anim.anim = walk;
@@ -94,7 +96,7 @@ public class Enemy : MonoBehaviour {
 		sr.color = Color.white;
 	}
 
-	private IEnumerator ExplodeRoutine()
+	protected virtual IEnumerator ExplodeRoutine()
 	{
 		if (bumpRoutine != null)
 			StopCoroutine(bumpRoutine);
@@ -102,8 +104,9 @@ public class Enemy : MonoBehaviour {
 			StopCoroutine(movementRoutine);
 		rb2d.velocity = Vector2.zero;
 		EffectPooler.PlayEffect(explosionAnim, transform.position, false, 0);
+		SoundManager.RandomizeSFX(deathSound);
 		playerTransform = transform;
-		yield return new WaitForSeconds(explosionAnim.GetSecondsUntilFrame(4));
+		yield return new WaitForSeconds(explosionAnim.GetSecondsUntilFrame(2));
 		gameObject.SetActive(false);
 	}
 }

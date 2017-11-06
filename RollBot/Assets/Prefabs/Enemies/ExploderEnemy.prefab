@@ -183,6 +183,7 @@ MonoBehaviour:
   energyDropAmount: 10
   collisionDamage: 20
   knockbackRadius: 0
+  deathSound: {fileID: 8300000, guid: d50e0f2d67a1041fdbfe7c336cca55d1, type: 3}
   explosionAnim:
     frames:
     - {fileID: 21300000, guid: e13e2aa07cbbc4629a91803db1553376, type: 3}
