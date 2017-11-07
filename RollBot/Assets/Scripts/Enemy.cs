@@ -12,16 +12,15 @@ public class Enemy : MonoBehaviour {
 	public SimpleAnimationPlayer anim;
 	public float moveSpeed;
 	public float maxHealth;
+	public float energyDropAmount;
 	private float health;
 	protected ObjectPooler lootPool;
 	public float collisionDamage;
 	public float knockbackRadius;
-	private bool isBumped;
 
 	public AudioClip deathSound;
 
 	public SimpleAnimation explosionAnim;
->>>>>>> d30c6d593524d1deb61692639378889f7a82899a
 
 	protected Coroutine movementRoutine;
 	protected Coroutine bumpRoutine;
@@ -37,30 +36,21 @@ public class Enemy : MonoBehaviour {
 		health = maxHealth;
 	}
 
-	public IEnumerator Movement(){
+	protected virtual IEnumerator Movement() {
 		for(;;){
-			float vx = 0;
-			float vy = 0;
-			Vector3 playerPos = playerTransform.position;
-			Vector3 playerPosUnit = (playerPos - transform.position).normalized;
-			vx = playerPosUnit.x;
-			vy = playerPosUnit.y;
-			rb2d.velocity = new Vector2(vx, vy) * moveSpeed;
-			sr.flipX = vx < 0;
+			Vector3 dir = (playerTransform.position - transform.position).normalized;
+			rb2d.velocity = dir * moveSpeed;
+			sr.flipX = dir.x < 0;
 			yield return null;
 		}
 	}
 
-
-	public IEnumerator Bumping(Vector3 init, Vector3 dest){
+	private IEnumerator Bumping(Vector3 init, Vector3 dest) {
 		float time = 0.35f;
 		float t = 0;
-		print("Destination: " + dest);
 		while(t<time){
 			t+=Time.deltaTime;
-			transform.position = Vector3.Lerp(transform.position, dest, time);
-			print(transform.position);
-
+			transform.position = Vector3.Lerp(transform.position, dest, t/time);
 			yield return null;
 		}
 		movementRoutine = StartCoroutine(Movement());
@@ -68,39 +58,44 @@ public class Enemy : MonoBehaviour {
 
 	public void Hit(float damage){
 		health -= damage;
+		StartCoroutine(FlashRed());
 		if(health <= 0){
 			this.Die();
 		}
 	}
 
 	public virtual void Die() {
+		Player player = GameManager.instance.player.GetComponent<Player>();
+		player.UpdateCombo();
 		GameObject l = lootPool.GetPooledObject();
 		l.transform.position = transform.position;
+		l.GetComponent<EnergyLoot>().SetEnergy(energyDropAmount);
 		l.SetActive(true);
-		gameObject.SetActive(false);
+		GameManager.instance.RemoveEnemy(this);
+		GetComponent<BoxCollider2D>().enabled = false;
+		StartCoroutine(ExplodeRoutine());
 	}
 
-	public void OnCollisionEnter2D(Collision2D collision) {
+	protected virtual void OnCollisionEnter2D(Collision2D collision) {
 		Player player = GameManager.instance.player.GetComponent<Player>();
 		if (collision.collider.CompareTag("Player")) {
-			player.takeEnergy(collisionDamage);
+			player.TakeEnergy(collisionDamage);
 			Vector3 playerPos = playerTransform.position;
 			Vector3 backwardPlayerPosUnit = (transform.position - playerPos).normalized;
-			print("Destination (calculation): " + backwardPlayerPosUnit + transform.position);
 			StopCoroutine(movementRoutine);
 			if (bumpRoutine != null)
 				StopCoroutine(bumpRoutine);
 			bumpRoutine = StartCoroutine(Bumping(transform.position, (backwardPlayerPosUnit + transform.position)));
 		}
+	}
 
-<<<<<<< HEAD
-		/* player.bump() feature DEPRECATED
-		Vector3 playerPos = playerTransform.position;
-		Vector3 playerPosUnit = playerTransform.position.normalized;
-		Vector3 bumpPosUnit = (playerTransform).position.normalized;
-		player.Bump(playerPos,playerPos+playerPosUnit*knockbackRadius);
-		*/
-=======
+	private IEnumerator FlashRed()
+	{
+		sr.color = Color.red;
+		yield return new WaitForSeconds(0.2f);
+		sr.color = Color.white;
+	}
+
 	protected virtual IEnumerator ExplodeRoutine()
 	{
 		if (bumpRoutine != null)
@@ -113,6 +108,5 @@ public class Enemy : MonoBehaviour {
 		playerTransform = transform;
 		yield return new WaitForSeconds(explosionAnim.GetSecondsUntilFrame(2));
 		gameObject.SetActive(false);
->>>>>>> d30c6d593524d1deb61692639378889f7a82899a
 	}
 }

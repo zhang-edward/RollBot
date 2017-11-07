@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class EnergyLoot : Loot {
 	public const float BIG_ENERGY_THRESHOLD = 7;

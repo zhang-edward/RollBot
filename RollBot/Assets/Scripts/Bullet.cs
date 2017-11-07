@@ -43,6 +43,7 @@ public class Bullet : MonoBehaviour {
 			DestroySelf();
 		}
 		if(collision.CompareTag("Collider")){
+			print("this");
 			DestroySelf();
 		}
 	}

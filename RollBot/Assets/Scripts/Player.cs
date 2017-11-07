@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
 
 	public float maxCombo = 100f;
 	public float combo;
-	private float comboStatus;
+	public float comboStatus;
 
 	private Vector2 dir;
 	private bool sprinting = false;
@@ -68,7 +68,6 @@ public class Player : MonoBehaviour {
 			fireRate = originalFireRate;
 			comboStatus = 0;
 		}
-		//energy -= Time.deltaTime * ENERGY_DECREASE_SPEED;
 		if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
 			moveSpeedMultiplier *= SPRINT_SPEED_MULTIPLIER;
